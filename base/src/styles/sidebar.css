@@ -1,0 +1,44 @@
+.sidebar {
+  height: calc(100vh);
+  overflow-y: auto;
+  background-color: #f5f9fc;
+
+  width: 150px;
+  padding: 10px;
+}
+
+.header {
+  border-bottom: 0.5px solid #c4e3fb;
+  padding-bottom: 10px;
+}
+
+.sidebar h1 {
+  font-size: 25px;
+}
+
+.sidebar input {
+  margin-top: 10px;
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #e1f1fd;
+  outline: none;
+  border-radius: 5px;
+}
+
+.sidebar .nav_links {
+  padding: 10px 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.sidebar .nav_link {
+  font-size: 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.sidebar .nav_link:hover {
+  background-color: #152737;
+  color: white;
+}
