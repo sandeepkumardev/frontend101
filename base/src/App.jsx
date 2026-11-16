@@ -8,7 +8,7 @@ import Docs from "./pages/Docs";
 function App() {
   return (
     <BrowserRouter>
-      <div className="App">
+      <div className="layout">
         <Sidebar />
 
         <div className="container">
