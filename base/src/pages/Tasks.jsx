@@ -1,22 +1,32 @@
 import { useState } from "react";
 
 const Tasks = () => {
-  // let count = 10;
-  const [count, setCount] = useState(10);
+  const [input, setInput] = useState("");
+  const [tasks, setTasks] = useState([]);
 
-  const inc = () => {
-    console.log(count);
-    // count = count + 1;
-    setCount(count + 1);
+  const handleInput = (e) => {
+    setInput(e.target.value);
+  };
+
+  const handleAdd = () => {
+    setTasks([...tasks, input]);
   };
 
   return (
     <div>
-      {count} <button onClick={inc}>+</button>
+      <div>
+        <input value={input} onChange={handleInput} />
+        <button onClick={handleAdd}>+</button>
+      </div>
+
+      <div>
+        <ul>
+          <li>Buy milk</li>
+          <li>Buy soda</li>
+        </ul>
+      </div>
     </div>
   );
 };
 
 export default Tasks;
-
-// useState
