@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { PanelRightClose, X } from "lucide-react";
 
-import "../styles/sidebar.css";
+import "../styles/sidebar.scss";
 import { useState } from "react";
 
 const Sidebar = () => {

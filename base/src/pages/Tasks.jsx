@@ -1,28 +1,40 @@
 import { useState } from "react";
+import { Trash } from "lucide-react";
 
 const Tasks = () => {
   const [input, setInput] = useState("");
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(["buy milk", "buy soda"]);
 
   const handleInput = (e) => {
     setInput(e.target.value);
   };
 
-  const handleAdd = () => {
+  const handleAdd = (e) => {
+    e.preventDefault();
+
     setTasks([...tasks, input]);
+    setInput("");
+  };
+
+  const handleDelete = (task) => {
+    const updatedList = tasks.filter((t) => t !== task);
+    setTasks(updatedList);
   };
 
   return (
     <div>
-      <div>
+      <form onSubmit={handleAdd}>
         <input value={input} onChange={handleInput} />
-        <button onClick={handleAdd}>+</button>
-      </div>
+        <button type="submit">+</button>
+      </form>
 
       <div>
         <ul>
-          <li>Buy milk</li>
-          <li>Buy soda</li>
+          {tasks.map((t) => (
+            <li>
+              <input type="checkbox" /> {t} <Trash onClick={() => handleDelete(t)} />
+            </li>
+          ))}
         </ul>
       </div>
     </div>
@@ -30,3 +42,5 @@ const Tasks = () => {
 };
 
 export default Tasks;
+
+// [1,2,3] = [<li>1</li>, <li>2</li>, <li>3</li>]
