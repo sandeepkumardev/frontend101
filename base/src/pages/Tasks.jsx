@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Trash } from "lucide-react";
+import { v4 as uuidv4 } from "uuid";
+import "../styles/tasks.scss";
 
 const Tasks = () => {
   const [input, setInput] = useState("");
-  const [tasks, setTasks] = useState(["buy milk", "buy soda"]);
+  const [tasks, setTasks] = useState([]);
 
   const handleInput = (e) => {
     setInput(e.target.value);
@@ -12,13 +14,17 @@ const Tasks = () => {
   const handleAdd = (e) => {
     e.preventDefault();
 
-    setTasks([...tasks, input]);
+    setTasks([...tasks, { id: uuidv4(), title: input, isCompleted: false }]);
     setInput("");
   };
 
-  const handleDelete = (task) => {
-    const updatedList = tasks.filter((t) => t !== task);
+  const handleUpdate = (e, id) => {
+    const updatedList = tasks.map((t) => (t.id === id ? { ...t, isCompleted: e.target.checked } : t));
     setTasks(updatedList);
+  };
+
+  const handleDelete = (id) => {
+    setTasks(tasks.filter((t) => t.id !== id));
   };
 
   return (
@@ -29,18 +35,15 @@ const Tasks = () => {
       </form>
 
       <div>
-        <ul>
-          {tasks.map((t) => (
-            <li>
-              <input type="checkbox" /> {t} <Trash onClick={() => handleDelete(t)} />
-            </li>
-          ))}
-        </ul>
+        {tasks.map((t) => (
+          <div key={t.id} className={` ${t.isCompleted ? "checked" : ""}`}>
+            <input type="checkbox" checked={t.isCompleted} onChange={(e) => handleUpdate(e, t.id)} /> {t.title}{" "}
+            <Trash onClick={() => handleDelete(t.id)} />
+          </div>
+        ))}
       </div>
     </div>
   );
 };
 
 export default Tasks;
-
-// [1,2,3] = [<li>1</li>, <li>2</li>, <li>3</li>]
