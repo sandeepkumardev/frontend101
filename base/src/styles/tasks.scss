@@ -1,4 +1,155 @@
-.checked {
-  text-decoration: line-through;
-  color: gray;
+.tasks {
+  width: 100%;
+  max-width: 420px;
+  margin: 40px auto;
+  padding: 24px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #222222;
+  font-family: Arial, sans-serif;
+
+  &__title {
+    margin: 0 0 20px;
+    font-size: 22px;
+    font-weight: 600;
+  }
+
+  &__form {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 18px;
+
+    input {
+      flex: 1;
+      min-width: 0;
+      height: 42px;
+      padding: 0 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 7px;
+      outline: none;
+      font: inherit;
+      font-size: 14px;
+
+      &:focus {
+        border-color: #555555;
+      }
+
+      &::placeholder {
+        color: #9ca3af;
+      }
+
+      &::selection {
+        background: rgb(227, 1, 106);
+        color: white;
+      }
+    }
+
+    button {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border: 0;
+      border-radius: 7px;
+      background: #222222;
+      color: #ffffff;
+      cursor: pointer;
+
+      &:hover:not(:disabled) {
+        background: #444444;
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+        opacity: 0.45;
+      }
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    padding: 8px 6px;
+    border-bottom: 1px solid #eeeeee;
+
+    &.is-completed .tasks__text {
+      color: #9ca3af;
+      text-decoration: line-through;
+    }
+
+    &::selection {
+      background: rgb(110, 110, 110);
+      color: white;
+    }
+
+    &:not(.is-completed)::selection {
+      background: rgb(227, 1, 106);
+      color: white;
+    }
+  }
+
+  &__check {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    input {
+      width: 16px;
+      height: 16px;
+      margin: 0;
+      accent-color: #222222;
+      cursor: pointer;
+    }
+  }
+
+  &__text {
+    flex: 1;
+    overflow-wrap: anywhere;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  &__delete {
+    display: grid;
+    width: 30px;
+    height: 30px;
+    place-items: center;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: #9ca3af;
+    cursor: pointer;
+
+    &:hover {
+      background: #f3f4f6;
+      color: #dc2626;
+    }
+  }
+
+  &__empty {
+    margin: 0;
+    padding: 16px 0 4px;
+    color: #9ca3af;
+    font-size: 14px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .tasks {
+    margin: 20px auto;
+    padding: 18px;
+  }
 }
