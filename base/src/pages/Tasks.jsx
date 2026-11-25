@@ -7,6 +7,9 @@ const Tasks = () => {
   const [input, setInput] = useState("");
   const [tasks, setTasks] = useState([]);
 
+  const completedTasks = tasks.filter((t) => t.isCompleted);
+  const pendingTasks = tasks.filter((t) => !t.isCompleted);
+
   const handleAdd = (e) => {
     e.preventDefault();
 
@@ -43,32 +46,35 @@ const Tasks = () => {
       </form>
 
       {tasks.length > 0 ? (
-        <ul className="tasks__list">
-          {tasks.map((task) => (
-            <li className={`tasks__item ${task.isCompleted ? "is-completed" : ""}`} key={task.id}>
-              <label className="tasks__check">
-                <input
-                  type="checkbox"
-                  checked={task.isCompleted}
-                  onChange={(e) => handleUpdate(task.id, e.target.checked)}
-                  aria-label={`Mark ${task.title} as ${task.isCompleted ? "incomplete" : "complete"}`}
-                />
-                <span />
-              </label>
+        <div>
+          {completedTasks.length} completed | {pendingTasks.length} Pending
+          <ul className="tasks__list">
+            {tasks.map((task) => (
+              <li className={`tasks__item ${task.isCompleted ? "is-completed" : ""}`} key={task.id}>
+                <label className="tasks__check">
+                  <input
+                    type="checkbox"
+                    checked={task.isCompleted}
+                    onChange={(e) => handleUpdate(task.id, e.target.checked)}
+                    aria-label={`Mark ${task.title} as ${task.isCompleted ? "incomplete" : "complete"}`}
+                  />
+                  <span />
+                </label>
 
-              <span className="tasks__text">{task.title}</span>
+                <span className="tasks__text">{task.title}</span>
 
-              <button
-                className="tasks__delete"
-                type="button"
-                onClick={() => handleDelete(task.id)}
-                aria-label={`Delete ${task.title}`}
-              >
-                <Trash2 size={17} />
-              </button>
-            </li>
-          ))}
-        </ul>
+                <button
+                  className="tasks__delete"
+                  type="button"
+                  onClick={() => handleDelete(task.id)}
+                  aria-label={`Delete ${task.title}`}
+                >
+                  <Trash2 size={17} />
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
       ) : (
         <p className="tasks__empty">No tasks added yet.</p>
       )}
